@@ -9,7 +9,7 @@ const GroupList = () => {
     useEffect(() => {
         const fetchGroups = async () => {
             try {
-                const response = await axios.get("https://192.168.2.10:5000/groups");
+                const response = await axios.get("https://checkin-backend-xzsf.onrender.com/groups");
                 setGroups(response.data); // Lưu danh sách nhóm
                 setLoading(false);
             } catch (err) {

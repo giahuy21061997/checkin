@@ -1,6 +1,5 @@
 {
   "name": "checkin-frontend",
-  "proxy": "http://192.168.2.10:5000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,7 +15,7 @@
     "web-vitals": "^4.2.4"
   },
   "scripts": {
-    "start": "cross-env HTTPS=true HOST=192.168.2.10 DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
+    "start": "cross-env HTTPS=true DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

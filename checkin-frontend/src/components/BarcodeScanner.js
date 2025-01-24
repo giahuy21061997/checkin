@@ -11,8 +11,8 @@ const BarcodeScanner = ({ onScanSuccess }) => {
         scannerRef.current = html5QrCode;
 
         const config = {
-            fps: 30, // Số khung hình mỗi giây
-            qrbox: { width: 300, height: 100 }, // Kích thước vùng quét (dài và thấp cho mã vạch)
+            fps: 10, // Số khung hình mỗi giây
+            qrbox: { width: 450, height: 250 }, // Kích thước vùng quét (dài và thấp cho mã vạch)
         };
 
         // Bắt đầu scanner
@@ -63,7 +63,7 @@ const BarcodeScanner = ({ onScanSuccess }) => {
             id={scannerId}
             style={{
                 position: "relative",
-                width: "400px",
+                width: "500px",
                 height: "300px",
                 margin: "auto",
                 border: "2px solid #ccc",
@@ -72,18 +72,7 @@ const BarcodeScanner = ({ onScanSuccess }) => {
             }}
         >
             {/* Khung hiển thị vùng quét */}
-            <div
-                style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    width: "300px", // Chiều rộng khung
-                    height: "100px", // Chiều cao khung
-                    border: "2px dashed #007bff",
-                    boxSizing: "border-box",
-                }}
-            ></div>
+           
         </div>
     );
 };

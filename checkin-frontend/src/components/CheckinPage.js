@@ -20,7 +20,7 @@ const CheckinPage = () => {
         }
 
         try {
-            const response = await axios.post("https://192.168.2.10:5000/checkin", {
+            const response = await axios.post("https://checkin-backend-xzsf.onrender.com/checkin", {
                 barcode,
             });
 
