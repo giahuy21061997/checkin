@@ -19,16 +19,23 @@ const BarcodeScanner = ({ onScanSuccess }) => {
         Html5Qrcode.getCameras()
             .then((cameras) => {
                 if (cameras && cameras.length > 0) {
-                    // Find camera facing back
-                    const backCamera = cameras.find((camera) => camera.label.toLowerCase().includes("back")) || cameras[0];
-                    
+                    let selectedCameraId;
+
+                    // iOS Safari không cung cấp nhãn rõ ràng, buộc chọn camera sau bằng cách chọn camera cuối
+                    if (cameras.length > 1) {
+                        selectedCameraId = cameras[cameras.length - 1].id; // Chọn camera cuối (thường là camera sau)
+                    } else {
+                        selectedCameraId = cameras[0].id; // Nếu chỉ có một camera, sử dụng nó
+                    }
+
+                    // Khởi động camera
                     html5QrCode
                         .start(
-                            backCamera.id, // Use back camera
+                            selectedCameraId, // Dùng ID camera sau
                             config,
                             (decodedText) => {
                                 console.log("Scanned barcode:", decodedText);
-                                onScanSuccess(decodedText); // Callback when scan is successful
+                                onScanSuccess(decodedText); // Callback khi scan thành công
                             },
                             (errorMessage) => {
                                 console.warn("Scan error:", errorMessage); // Handle scan errors
