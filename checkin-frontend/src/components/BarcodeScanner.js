@@ -17,18 +17,21 @@ const BarcodeScanner = ({ onScanSuccess }) => {
 
         // Bắt đầu scanner
         Html5Qrcode.getCameras()
-            .then((devices) => {
-                if (devices && devices.length > 0) {
+            .then((cameras) => {
+                if (cameras && cameras.length > 0) {
+                    // Find camera facing back
+                    const backCamera = cameras.find((camera) => camera.label.toLowerCase().includes("back")) || cameras[0];
+                    
                     html5QrCode
                         .start(
-                            devices[0].id, // Chọn camera đầu tiên
+                            backCamera.id, // Use back camera
                             config,
                             (decodedText) => {
                                 console.log("Scanned barcode:", decodedText);
-                                onScanSuccess(decodedText); // Callback khi quét thành công
+                                onScanSuccess(decodedText); // Callback when scan is successful
                             },
                             (errorMessage) => {
-                                console.warn("Scan error:", errorMessage); // In lỗi nếu cần
+                                console.warn("Scan error:", errorMessage); // Handle scan errors
                             }
                         )
                         .catch((err) => {
