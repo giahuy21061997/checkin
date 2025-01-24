@@ -5,7 +5,7 @@ const { Pool } = require("pg");
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors({ origin: "https://<frontend-render-url>" })); // Thay bằng URL frontend trên Render
+app.use(cors({ origin: "https://checkin-frontend.onrender.com" })); // Thay bằng URL frontend trên Render
 
 const pool = new Pool({
     user: process.env.PG_USER,
