@@ -12,7 +12,7 @@ const BarcodeScanner = ({ onScanSuccess }) => {
 
         const config = {
             fps: 10, // Số khung hình mỗi giây
-            qrbox: { width: 450, height: 250 }, // Kích thước vùng quét (dài và thấp cho mã vạch)
+            qrbox: { width: 400, height: 200 }, // Kích thước vùng quét (dài và thấp cho mã vạch)
         };
 
         // Bắt đầu scanner
