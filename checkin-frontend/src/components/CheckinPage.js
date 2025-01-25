@@ -42,7 +42,6 @@ const CheckinPage = () => {
 
     return (
         <div style={{ textAlign: "center", padding: "20px" }}>
-            <h2>Quét Mã Vạch</h2>
             <BarcodeScanner onScanSuccess={handleScanSuccess} />
             {barcode && <p>Mã đã quét: {barcode}</p>}
             <button
