@@ -52,6 +52,26 @@ app.post("/checkin", async (req, res) => {
     }
 });
 
+app.get("/checkin-stats", async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT group_name, current_checkins 
+            FROM groups
+            ORDER BY id ASC
+        `);
+
+        const stats = result.rows.reduce((acc, row) => {
+            acc[row.group_name] = row.current_checkins;
+            return acc;
+        }, {});
+
+        res.json(stats);
+    } catch (error) {
+        console.error("Lỗi khi lấy dữ liệu check-in:", error);
+        res.status(500).json({ message: "Lỗi server" });
+    }
+});
+
 // Khởi chạy server
 app.listen(5000, () => {
     console.log("Server is running on port 5000");
