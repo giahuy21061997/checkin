@@ -4,7 +4,7 @@ const GroupStats = ({ goBack }) => {
     const [groupStats, setGroupStats] = useState([]);
 
     useEffect(() => {
-        fetch("https://checkin-backend.onrender.com/checkin-stats")
+        fetch("https://checkin-backend-xzsf.onrender.com/checkin-stats")
             .then((response) => response.json())
             .then((data) => setGroupStats(data))
             .catch((error) => console.error("Lỗi khi lấy dữ liệu:", error));
@@ -13,14 +13,17 @@ const GroupStats = ({ goBack }) => {
     return (
         <div className="group-stats-container">
             <h2>📊 Thống kê Check-in</h2>
-            <ul>
-                {groupStats.map((group, index) => (
-                    <li key={index}>
-                        <span>{group.group_name}</span> - <b>{group.current_checkins} người</b>
-                    </li>
+            
+            <div className="stats-grid">
+                {Object.entries(groupStats).map(([groupName, count], index) => (
+                    <div key={index} className="stats-card">
+                        <span className="group-name">{groupName}</span>
+                        <span className="checkin-count">{count} người</span>
+                    </div>
                 ))}
-            </ul>
-            <button onClick={goBack}>⬅ Quay lại</button>
+            </div>
+
+            <button className="back-btn" onClick={goBack}>⬅ Quay lại</button>
         </div>
     );
 };

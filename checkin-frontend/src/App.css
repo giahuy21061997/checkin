@@ -5,6 +5,8 @@ body {
   padding: 0;
   background: #f4f4f4;
   color: #333;
+  background: url('./BG_EDM.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 .app {
@@ -82,14 +84,15 @@ input {
 
 /* Giao diện chính */
 .group-stats-container {
+  margin-top: 100px;
   text-align: center;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.9); /* Nền mờ */
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 400px;
-  margin: 20px auto;
+  /* margin: 20px auto; */
 }
 
 /* Tiêu đề */
