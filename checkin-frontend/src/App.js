@@ -1,23 +1,17 @@
 import React, { useState } from "react";
 import LandingPage from "./components/LandingPage";
 import CheckinPage from "./components/CheckinPage";
-import GroupList from "./components/GroupList"; // Import GroupList
+import GroupStats from "./components/GroupStats";
 import "./App.css";
-import BarcodeScanner from "./components/BarcodeScanner";
 
 const App = () => {
-    const [isCheckin, setIsCheckin] = useState(false);
-
-    const startCheckin = () => {
-        setIsCheckin(true);
-    };
+    const [currentPage, setCurrentPage] = useState("landing"); // State điều hướng trang
 
     return (
         <div className="app">
-     
-            
-            {/* Hiển thị LandingPage hoặc CheckinPage dựa trên trạng thái */}
-            {isCheckin ? <CheckinPage /> : <LandingPage startCheckin={startCheckin} />}
+            {currentPage === "landing" && <LandingPage startCheckin={() => setCurrentPage("checkin")} showStats={() => setCurrentPage("stats")} />}
+            {currentPage === "checkin" && <CheckinPage goBack={() => setCurrentPage("landing")} />}
+            {currentPage === "stats" && <GroupStats goBack={() => setCurrentPage("landing")} />}
         </div>
     );
 };

@@ -17,10 +17,10 @@ body {
 
 .landing-page, .checkin-page {
   text-align: center;
-  background: white;
+  background: rgba(255, 255, 255, 0.4);
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  /* border-radius: 20px; */
+  /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
 }
 
 button {
@@ -52,10 +52,79 @@ input {
   margin-top: 20px;
   font-weight: bold;
 }
-/* #html5qr-code-scanner {
-  margin: auto;
-  width: 50px;
-  height: 200px;
-  border: 1px solid #ccc;
+/* Background cho LandingPage */
+.landing-page::before {
+  content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Căn giữa */
+    width: 100%;
+    height: 100%;
+    background: url('./BG_EDM.jpg') no-repeat center top;
+    background-size: cover;
+    z-index: -1; /* Đưa background xuống dưới */
+}
+
+/* Background cho CheckinPage */
+.checkin-page::before {
+  content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Căn giữa */
+    width: 100%;
+    height: 100%;
+    background: url('./BG_EDM.jpg') no-repeat center top;
+    background-size: cover;
+    z-index: -1; /* Đưa background xuống dưới */
+}
+
+/* Giao diện chính */
+.group-stats-container {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9); /* Nền mờ */
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+/* Tiêu đề */
+.group-stats-container h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+/* Grid hiển thị danh sách nhóm */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Hiển thị 2 cột */
+  gap: 10px;
+}
+
+/* Card của mỗi nhóm */
+.stats-card {
+  background: #007bff;
+  color: white;
+  padding: 12px;
   border-radius: 10px;
-} */
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Tên nhóm */
+.group-name {
+  display: block;
+  font-size: 14px;
+}
+
+/* Số người check-in */
+.checkin-count {
+  font-size: 18px;
+  font-weight: bold;
+  color: yellow;
+}
