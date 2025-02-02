@@ -47,7 +47,7 @@ const CheckinPage = () => {
             <button
                 style={{
                     padding: "10px 20px",
-                    backgroundColor: "#007bff",
+                    backgroundColor: "rgb(166,36,35);",
                     color: "#fff",
                     border: "none",
                     borderRadius: "5px",
@@ -66,11 +66,11 @@ const CheckinPage = () => {
             {checkinDetails && (
                 <div style={{ marginTop: "20px", color: "blue" }}>
                     <p>
-                        Bạn là người thứ <strong>{checkinDetails.currentCheckins}</strong> trong nhóm{" "}
-                        <strong>{checkinDetails.groupName}</strong>.
+                        Bạn là người thứ <strong>{checkinDetails.current_checkins}</strong> trong nhóm{" "}
+                        <strong>{checkinDetails.group_name}</strong>.
                     </p>
                     <p>
-                        Số người tối đa: <strong>{checkinDetails.maxCheckins}</strong>.
+                        Số người tối đa: <strong>{checkinDetails.max_checkins}</strong>.
                     </p>
                 </div>
             )}

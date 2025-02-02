@@ -1,6 +1,21 @@
+@font-face {
+  font-family: "OrchardHeights";
+  src: url("./assets/fonts/LC-OrchardHeights-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OrchardHeights";
+  src: url("./assets/fonts/LC-OrchardHeights-SemiBold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+
 /* App.css */
 body {
-  font-family: Arial, sans-serif;
+  font-family: "OrchardHeights", sans-serif;
   margin: 0;
   padding: 0;
   background: #f4f4f4;
@@ -19,16 +34,16 @@ body {
 
 .landing-page, .checkin-page {
   text-align: center;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255,228,185);
   padding: 20px;
-  /* border-radius: 20px; */
+  border-radius: 20px;
   /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
 }
 
 button {
-  background: #007bff;
-  color: white;
-  padding: 10px 20px;
+  background: rgb(166,36,35);
+  color: rgba(255,228,185);
+  padding: 10px 30px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -37,7 +52,7 @@ button {
 }
 
 button:hover {
-  background: #0056b3;
+  background: rgb(166,36,35);
 }
 
 input {
@@ -84,10 +99,10 @@ input {
 
 /* Giao diện chính */
 .group-stats-container {
-  margin-top: 100px;
+  margin-top: 150px;
   text-align: center;
   padding: 10px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255,228,185);
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 90%;
@@ -110,7 +125,7 @@ input {
 
 /* Card của mỗi nhóm */
 .stats-card {
-  background: #007bff;
+  background: rgb(166,36,35);
   color: white;
   padding: 12px;
   border-radius: 10px;

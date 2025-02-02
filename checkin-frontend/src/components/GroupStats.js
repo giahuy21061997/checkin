@@ -12,7 +12,7 @@ const GroupStats = ({ goBack }) => {
 
     return (
         <div className="group-stats-container">
-            <h2>📊 Thống kê Check-in</h2>
+            <h2>Thống kê Check-in</h2>
             
             <div className="stats-grid">
                 {Object.entries(groupStats).map(([groupName, count], index) => (
