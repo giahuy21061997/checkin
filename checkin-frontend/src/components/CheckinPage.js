@@ -45,7 +45,16 @@ const CheckinPage = () => {
     return (
         <div style={{ textAlign: "center", padding: "20px" }}>
             <BarcodeScanner onScanSuccess={handleScanSuccess} />
-            {barcode && <p>Mã đã quét: {barcode}</p>}
+            {barcode && (
+                <p style={{ 
+                    color: "rgba(255,228,185)", // 🔴 Đổi màu chữ thành màu yêu cầu
+                    fontSize: "18px", 
+                    fontWeight: "bold",
+                    marginTop: "10px"
+                }}>
+                    Mã đã quét: {barcode}
+                </p>
+            )}
             <button
                 style={{
                     padding: "10px 20px",
