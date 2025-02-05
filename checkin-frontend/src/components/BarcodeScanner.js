@@ -2,44 +2,51 @@ import React, { useEffect, useRef, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
 const BarcodeScanner = ({ onScanSuccess }) => {
-    const scannerId = "html5qr-code-scanner"; 
+    const scannerId = "html5qr-code-scanner"; // ID của container scanner
     const [error, setError] = useState(null);
+    const [isCheckingIn, setIsCheckingIn] = useState(false); // Trạng thái check-in
     const scannerRef = useRef(null);
-    const isScanning = useRef(false); // 🔴 Thêm biến kiểm tra trạng thái scanner
 
     useEffect(() => {
         const html5QrCode = new Html5Qrcode(scannerId);
         scannerRef.current = html5QrCode;
 
         const config = {
-            fps: 10,
-            qrbox: { width: 300, height: 400 },
+            fps: 10, // Số khung hình mỗi giây
+            qrbox: { width: 300, height: 400 }, // Kích thước vùng quét (dài và thấp cho mã vạch)
         };
 
+        // Bắt đầu scanner
         Html5Qrcode.getCameras()
             .then((cameras) => {
-                if (cameras.length > 0) {
-                    let selectedCameraId = cameras.length > 1 ? cameras[cameras.length - 1].id : cameras[0].id;
+                if (cameras && cameras.length > 0) {
+                    let selectedCameraId;
 
-                    // 🔴 Tránh chạy scanner nhiều lần
-                    if (!isScanning.current) {
-                        isScanning.current = true;
-
-                        html5QrCode
-                            .start(
-                                selectedCameraId,
-                                config,
-                                (decodedText) => {
-                                    console.log("Scanned barcode:", decodedText);
-                                    onScanSuccess(decodedText);
-                                },
-                                (errorMessage) => console.warn("Scan error:", errorMessage)
-                            )
-                            .catch((err) => {
-                                console.error("Unable to start scanner:", err);
-                                setError("Không thể khởi động camera.");
-                            });
+                    // iOS Safari không cung cấp nhãn rõ ràng, buộc chọn camera sau bằng cách chọn camera cuối
+                    if (cameras.length > 1) {
+                        selectedCameraId = cameras[cameras.length - 1].id; // Chọn camera cuối (thường là camera sau)
+                    } else {
+                        selectedCameraId = cameras[0].id; // Nếu chỉ có một camera, sử dụng nó
                     }
+
+                    // Khởi động camera
+                    html5QrCode
+                        .start(
+                            selectedCameraId, // Dùng ID camera sau
+                            config,
+                            (decodedText) => {
+                                console.log("Scanned barcode:", decodedText);
+                                onScanSuccess(decodedText); // Callback khi scan thành công
+                                setIsCheckingIn(true); // Chặn quét tiếp theo
+                            },
+                            (errorMessage) => {
+                                console.warn("Scan error:", errorMessage); // Handle scan errors
+                            }
+                        )
+                        .catch((err) => {
+                            console.error("Unable to start scanner:", err);
+                            setError("Không thể khởi động camera.");
+                        });
                 } else {
                     setError("Không tìm thấy camera nào.");
                 }
@@ -50,19 +57,46 @@ const BarcodeScanner = ({ onScanSuccess }) => {
             });
 
         return () => {
-            if (scannerRef.current && isScanning.current) {
-                isScanning.current = false;
-                scannerRef.current.stop().catch((err) => console.error("Error stopping scanner:", err));
-                scannerRef.current = null;
+            if (scannerRef.current.isScanning) {
+                scannerRef.current
+                    .stop()
+                    .then(() => console.log("Scanner stopped"))
+                    .catch((err) => console.error("Error stopping scanner:", err));
             }
         };
-    }, [onScanSuccess]);
+    }, [onScanSuccess , isCheckingIn]);
 
+    useEffect(() => {
+        window.addEventListener("checkinCompleted", () => {
+            setIsCheckingIn(false); // Mở lại camera sau khi nhấn Check-in
+        });
+
+        return () => {
+            window.removeEventListener("checkinCompleted", () => setIsCheckingIn(false));
+        };
+    }, []);
+    
     if (error) {
         return <div style={{ color: "red" }}>{error}</div>;
     }
 
-    return <div id={scannerId} style={{ width: "500px", height: "600px", margin: "auto" }}></div>;
+    return (
+        <div
+            id={scannerId}
+            style={{
+                position: "relative",
+                width: "500px",
+                height: "600px",
+                margin: "auto",
+                border: "2px solid #ccc",
+                borderRadius: "10px",
+                overflow: "hidden",
+            }}
+        >
+            {/* Khung hiển thị vùng quét */}
+           
+        </div>
+    );
 };
 
 export default BarcodeScanner;
