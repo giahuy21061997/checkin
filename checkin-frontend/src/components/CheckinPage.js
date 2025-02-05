@@ -48,7 +48,7 @@ const CheckinPage = () => {
                 style={{
                     padding: "10px 20px",
                     backgroundColor: "rgb(166,36,35);",
-                    color: "#fff",
+                    color: "rgba(255,228,185);",
                     border: "none",
                     borderRadius: "5px",
                     cursor: "pointer",
