@@ -37,6 +37,8 @@ const CheckinPage = () => {
         } catch (error) {
             console.error("Error during check-in:", error);
             setStatusMessage("Lỗi khi kết nối đến server.");
+        } finally {
+            window.dispatchEvent(new Event("checkinCompleted")); // Gửi sự kiện mở lại camera
         }
     };
 
