@@ -4,7 +4,6 @@ import { Html5Qrcode } from "html5-qrcode";
 const BarcodeScanner = ({ onScanSuccess }) => {
     const scannerId = "html5qr-code-scanner"; // ID của container scanner
     const [error, setError] = useState(null);
-    const [isCheckingIn, setIsCheckingIn] = useState(false); // Trạng thái check-in
     const scannerRef = useRef(null);
 
     useEffect(() => {
@@ -37,7 +36,6 @@ const BarcodeScanner = ({ onScanSuccess }) => {
                             (decodedText) => {
                                 console.log("Scanned barcode:", decodedText);
                                 onScanSuccess(decodedText); // Callback khi scan thành công
-                                setIsCheckingIn(true); // Chặn quét tiếp theo
                             },
                             (errorMessage) => {
                                 console.warn("Scan error:", errorMessage); // Handle scan errors
@@ -64,18 +62,8 @@ const BarcodeScanner = ({ onScanSuccess }) => {
                     .catch((err) => console.error("Error stopping scanner:", err));
             }
         };
-    }, [onScanSuccess , isCheckingIn]);
+    }, [onScanSuccess]);
 
-    useEffect(() => {
-        window.addEventListener("checkinCompleted", () => {
-            setIsCheckingIn(false); // Mở lại camera sau khi nhấn Check-in
-        });
-
-        return () => {
-            window.removeEventListener("checkinCompleted", () => setIsCheckingIn(false));
-        };
-    }, []);
-    
     if (error) {
         return <div style={{ color: "red" }}>{error}</div>;
     }
