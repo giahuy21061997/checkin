@@ -26,8 +26,8 @@ const CheckinPage = () => {
 
             if (response.data.success) {
                 setCheckinDetails({
-                    groupName: response.data.groupName,
-                    currentCheckins: response.data.currentCheckins,
+                    groupName: response.data.group_name,
+                    currentCheckins: response.data.current_checkins,
                     maxCheckins: response.data.maxCheckins,
                 });
                 setStatusMessage("Check-in thành công!");
@@ -37,9 +37,7 @@ const CheckinPage = () => {
         } catch (error) {
             console.error("Error during check-in:", error);
             setStatusMessage("Lỗi khi kết nối đến server.");
-        } finally {
-            window.dispatchEvent(new Event("checkinCompleted")); // Gửi sự kiện mở lại camera
-        }
+        } 
     };
 
     return (
@@ -79,9 +77,6 @@ const CheckinPage = () => {
                     <p>
                         Bạn là người thứ <strong>{checkinDetails.current_checkins}</strong> trong nhóm{" "}
                         <strong>{checkinDetails.group_name}</strong>.
-                    </p>
-                    <p>
-                        Số người tối đa: <strong>{checkinDetails.max_checkins}</strong>.
                     </p>
                 </div>
             )}
